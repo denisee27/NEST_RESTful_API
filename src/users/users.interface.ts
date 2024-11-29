@@ -1,1 +1,7 @@
-export interface Users {0}
+export interface Users {    
+    id:number,
+    name:string,
+    email:string,
+    status:boolean,
+    age:number
+}
