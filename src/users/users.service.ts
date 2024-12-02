@@ -7,11 +7,16 @@ import { Repository } from 'typeorm';
 export class UsersService {
     constructor(
         @InjectRepository(User)
-        private readonly userRepository: Repository<User>,
+        private userRepository: Repository<User>,
     ) { }
 
-    findAll(): Promise<User[]> {
-        return this.userRepository.find();
+    async getAll(): Promise<User[]> {
+        return await this.userRepository.find();
     }
 
+    async getId(id: number): Promise<User> {
+        return this.userRepository.findOne({
+            where: { id: id },
+        });
+    }
 }
