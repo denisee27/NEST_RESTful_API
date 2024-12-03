@@ -11,8 +11,8 @@ export class User {
     @Column()
     email: string;
 
-    @Column({ default: true })
-    status: boolean;
+    @Column({ default: 0 })
+    status: number;
 
     @Column()
     age: number;
