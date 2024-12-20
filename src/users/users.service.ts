@@ -27,4 +27,26 @@ export class UsersService {
             return e.message
         }
     }
+
+    async update(id: string, updateUserDto: CreateUserDto): Promise<User | null> {
+        const user = await this.userRepository.findOne({ where: { id: Number(id) } });
+
+        if (!user) {
+            return null;
+        }
+        user.email = updateUserDto.email || user.email;
+        user.name = updateUserDto.name || user.name;
+        user.status = updateUserDto.status || user.status;
+        user.age = updateUserDto.age || user.age;
+        return this.userRepository.save(user);
+    }
+
+    async delete(id: string): Promise<User | null> {
+        const user = await this.userRepository.findOne({ where: { id: Number(id) } });
+        if (!user) {
+            return null;
+        }
+        await this.userRepository.remove(user);  // Menggunakan remove untuk menghapus entitas dari database
+        return user;
+    }
 }
