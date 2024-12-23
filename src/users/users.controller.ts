@@ -1,12 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Res} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AppResponse } from 'src/response.base';
 import { CreateUserDto } from './dto/create_user.dto';
+// import { JwtAuthGuard } from 'src/auth/jwtauthguard';
+
 
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) { }
-
+    
+    // @UseGuards(JwtAuthGuard)
     @Get()
     async get(@Res() res) {
         try {
@@ -49,6 +52,7 @@ export class UsersController {
             return AppResponse.badRequest(res, e.message);
         }
     }
+    
     @Delete('delete/:id')
     async delete(@Res() res, @Param('id') id: string) {
         try {

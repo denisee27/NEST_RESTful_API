@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config'
+import { PassportModule } from '@nestjs/passport';
+// import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,7 +22,10 @@ import { ConfigModule } from '@nestjs/config'
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UsersModule],
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    UsersModule,
+    // AuthModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
